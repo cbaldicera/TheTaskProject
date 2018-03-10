@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TheTask.Models.Task>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Lista de Tarefas</h2>
+<hr />
+<p>
+    @Html.ActionLink("Criar Nova Tarefa", "Create", null, new { @class = "btn btn-default" })
+    @using (Html.BeginForm())
+    {
+    <div class="form-horizontal">
+        @Html.TextBox("searchParam")
+        <input type="submit" value="Buscar" class="btn btn-default" />
+    </div>
+    }
+    </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExecutionDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExecutionDate)
+            </td>
+            <td>
+                @Html.ActionLink("Alterar", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Excluir", "Delete", new { id = item.ID }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
